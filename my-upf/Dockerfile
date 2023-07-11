@@ -34,7 +34,7 @@ ENV LD_LIBRARY_PATH=/usr/lib64:/usr/local/lib:/usr/local/lib64
 
 WORKDIR /home/truCore
 
-#COPY upf_bin_config/upf.out upf_bin_config/dp.cfg upf_bin_config/upf_post_tun.ksh /home/truCore/
+COPY upf_bin_config/upf.out upf_bin_config/dp.cfg upf_bin_config/upf_post_tun.ksh /home/truCore/
 
 CMD ["sleep" "infinity"]
 
