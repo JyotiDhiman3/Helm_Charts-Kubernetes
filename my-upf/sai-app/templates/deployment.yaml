@@ -41,7 +41,6 @@ spec:
         - name: config-volume
           mountPath: /temp
           readOnly: true
-#          subPathExpr: "$(CONFIG_FILE)"
         env:
         - name: CONFIG_FILE
           value: dp.cfg
