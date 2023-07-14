@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sai-app.fullname" . }}
+  labels:
+    {{- include "sai-app.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "sai-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+   {{- end }}
+      labels:
+        {{- include "sai-app.selectorLabels" . | nindent 8 }}
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: my-config-updated
+#      {{- with .Values.imagePullSecrets }}
+#      imagePullSecrets:
+#        {{- toYaml . | nindent 8 }}
+#      {{- end }}
+      serviceAccountName: {{ include "sai-app.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+#        imagePullPolicy: Never
+        volumeMounts:
+        - name: config-volume
+          mountPath: /temp
+          readOnly: true
+#          subPathExpr: "$(CONFIG_FILE)"
+        env:
+        - name: CONFIG_FILE
+          value: dp.cfg
+        - name: DOCKER_OPTS
+          value: "--cap-add=NET_ADMIN --device /dev/net/tun:/dev/net/tun"
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["SYS_ADMIN"]
+        command: ["/bin/sh", "-c"]
+        args:
+          - >
+            cp /temp/dp.cfg /home/truCore &&
+            ./upf.out
+#      volumes:
+#      - name: config-volume
+#        configMap:
+#          name: my-configmap
+#        livenessProbe:
+#            httpGet:
+#              path: /healthz
+#              port: 8080
+#            initialDelaySeconds: 15
+#            periodSeconds: 10
+#        readinessProbe:
+ #           httpGet:
+ #             path: /ready
+#              port: 8080
+#            initialDelaySeconds: 15
+#            periodSeconds: 10
+        resources:
+        {{- toYaml .Values.resources | nindent 12 }}
+#      {{- with .Values.nodeSelector }}
+#      nodeSelector:
+#        {{- toYaml . | nindent 8 }}
+#      {{- end }}
+#      {{- with .Values.affinity }}
+#      affinity:
+#        {{- toYaml . | nindent 8 }}
+#      {{- end }}
+#      {{- with .Values.tolerations }}
+#      tolerations:
+#        {{- toYaml . | nindent 8 }}
+#      {{- end }}

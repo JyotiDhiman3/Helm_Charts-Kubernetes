@@ -1,0 +1,26 @@
+
+# multus.yaml
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: host-net1
+#  namespace: truminds
+spec:
+  config: '{
+        "cniVersion": "0.3.1",
+        "type": "host-device",
+        "device": "ens4",
+        "ipam": {
+            "type": "static",
+                        "addresses": [
+                                {
+                                        "address": "{{ .Values.config.address}}"
+                                }],
+                        "routes": [
+                                {
+                                        "dst": "{{ .Values.config.dst}}"
+                                }]
+            }
+          }'
+
