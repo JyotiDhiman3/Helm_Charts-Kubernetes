@@ -1,4 +1,6 @@
 # Helm_Charts-Kubernetes
 
-Here, we have deployed pods using helm-charts and multus cni.
-UPF(5G Node) application pod is also deployed and ran using helm charts.
+the installation guide(kubernetes.install.docx) contains the installation process of kubernetes using one master and worker node and the multus installation to it and how to create helm charts
+
+
+
