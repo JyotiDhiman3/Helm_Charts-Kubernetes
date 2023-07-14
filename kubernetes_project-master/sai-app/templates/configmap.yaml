@@ -1,0 +1,132 @@
+apiVersion: v1
+data:
+  dp.cfg: "BEGIN_DP_CFG\nNUM_SUBSCRIBERS=100\nNUMCORE=2\n# comma separated list of
+    \    permit out proto ip from any 53-55 to 1922.68.2.19 43-45, permit out proto
+    ip from any 53-55 to 1922.68.2.19 43-45\nSP_SWITCH_RULE = \nSP_MGMT_IP = {{ .Values.podIP}}\nSP_MGMT_IPV6
+    = \nARP_SPA=0\nSP_LOGLEVEL = \nFP_LOGLEVEL =\n# this will be used to timeout the
+    local arpcache maintained by DP\n# unit is seconds\nARP_TIMER=\n# this will be
+    used to timeout the Eth PDU ARP table entries maintained by DP\n# unit is seconds\nETH_PDU_ARP_TIMER=\nINCLUDE_FIRST_CORE
+    =\nFP_CORE_START = 1\nFP_CORE_END = 1\n#MAX_RETRANSMIT_MSG = Maximum number of
+    retransmitted message to be stored\nMAX_RETRANSMIT_MSG=\n#RETRANSMIT_TIMEPERIOD
+    = Time after which PFCP request msg has to be retransmitted (in seconds)\nRETRANSMIT_TIMEPERIOD=\n#NUM_RETRANSMIT_RETRIES
+    = Number of retries to send PFCP req msg before discarding\nNUM_RETRANSMIT_RETRIES=\nUPF_SUPPORTED_FEATURES=BUCP,DDND,DLBD,TRST,FTUP,PFDM,HEEU,TREU,EMPU,PDIU,UDBC,QUOAC,TRACE,FRRT,PFDE,EPFAR,DPDRA,ADPDP,UEIP,SSET,MNOP,MTE.BUNDL,GCOM,MPAS,RTTL,VTIME,
+    NORP, IPTV, IP6PL, TSCU, MPTCP, ATSSSLL, QFQM, GPQM, MT_EDT, CIOT, ETHAR, DDDS,
+    RDS, RTTWP, QUASF, NSPOC, L2TP, UPBER, RESPS, IPREP, DNSTS, DRQOS, MBSN4, PSUPRM,
+    EPPI, RATP, UPIDP, AFSFC, MPQUIC, REDSM\n#UPF_SUPPORTED_FEATURES=\nNO_GTP_RECOVERY_TS=\n\n#GTP_IP=ipv4/24@eth@vlanid@networkinstanceid,
+    ipv4/16@eth@vlanid (if network instance id is not present, it will be taken as
+    zero)\nGTP_IP={{ .Values.podIP}}/24@net1@4097\n#GTP_IP6=ipv6/24@eth@vlanid@networkinstanceid,
+    ipv6/16@eth@vlanid (if network instance id is not present, it will be taken as
+    zero)\nGTP_IP6=\n\n#GTP_CORE_IP=ipv4/24@eth@vlanid@networkinstanceid, ipv4/16@eth@vlanid
+    (if network instance id is not present, it will be taken as zero)\nGTP_CORE_IP={{
+    .Values.podIP}}/24@net1@4097\n#GTP_CORE_IP6=ipv6/24@eth@vlanid@networkinstanceid,
+    ipv6/16@eth@vlanid (if network instance id is not present, it will be taken as
+    zero)\nGTP_CORE_IP6=\n\n#CP_INTF_IP=ipv4/24@eth@vlanid@networkinstanceid, ipv4/16@eth@vlanid
+    (if network instance id is not present, it will be taken as zero)\nCP_INTF_IP={{
+    .Values.podIP}}/24@net1@4097\n#CP_INTF_IP6=ipv6/24@eth@vlanid@networkinstanceid,
+    ipv6/16@eth@vlanid (if network instance id is not present, it will be taken as
+    zero)\nCP_INTF_IP6=\n\n#LI_INTF_IP=ipv4/24@eth@vlanid@networkinstanceid, ipv4/16@eth@vlanid
+    (if network instance id is not present, it will be taken as zero)\nLI_INTF_IP={{
+    .Values.podIP}}/24@net1@4097\n#LI_INTF_IP6=ipv6/24@eth@vlanid@networkinstanceid,
+    ipv6/16@eth@vlanid (if network instance id is not present, it will be taken as
+    zero)\nLI_INTF_IP6=\n\n#PDN_IP=ipv4/24@eth@vlanid@networkinstanceid, ipv4/16@eth@vlanid
+    (if network instance id is not present, it will be taken as zero)\nPDN_IP={{ .Values.podIP}}/24@net1@4097\n#PDN_IP6=ipv6/24@eth@vlanid@networkinstanceid,
+    ipv4/16@eth@vlanid (if network instance id is not present, it will be taken as
+    zero)\nPDN_IP6=\n\nGLOBAL_TEID_ALLOC=\n\n#NAT_PUBLIC_IPV4=ipv4-address\nNAT_PUBLIC_IPV4=\n#NAT_PUBLIC_IPV6=ipv6-address\nNAT_PUBLIC_IPV6=\n#NAT_FLOW_IDLE_TIMEOUT=time
+    in millisec\nNAT_FLOW_IDLE_TIMEOUT=\n#MAX_NAT_FLOWS=Total number of NAT flow mappings
+    allowed\nMAX_NAT_FLOWS=\n\n#TEID = <gtpip4>@teidrangebits@teidrangevalue, ...\nTEID=\n#TEID6
+    = <gtpip6>@teidrangebits@teidrangevalue, ...\nTEID6=\n#TEID_CORE = <gtpip4>@teidrangebits@teidrangevalue,
+    ...\nTEID_CORE=\n#TEID_CORE6 = <gtpip6>@teidrangebits@teidrangevalue, ...\nTEID_CORE6=\n#TEID_CP
+    = <gtpip4>@teidrangebits@teidrangevalue, ...\nTEID_CP=\n#TEID_CP6 = <gtpip6>@teidrangebits@teidrangevalue,
+    ...\nTEID_CP6=\n\n#IP_POOL=beginip@endip@name@<networkInstance>, beginip@endip@name@<networkInstance>,
+    ...\nIP_POOL=11.11.11.1@11.11.255.255@pool_ipv4\n#IP_POOL6=beginip@endip@prefix@name@<networkInstance>@sst@sd,
+    beginip@endip@prefix@name@<networkInstance>@sst@sd, ...\nIP_POOL6=\n\n#IP_USAGE_THRESHOLD
+    parameter(between 0-100)\nIP_USAGE_THRESHOLD=\n#IP_USAGE_VALIDITY_TIME time in
+    seconds\nIP_USAGE_VALIDITY_TIME=\n\n#Eth PDU details for sending/receiving udp
+    encapsulated packets\n#ETH_PDU_TUNNEL=txipv4@txport@rxport@optionalNetworkInstanceId,
+    ....\nETH_PDU_TUNNEL=\n#ETH_PDU_TUNNEL6=txipv6@txport@rxport@optionalNetworkInstanceId,
+    ....\nETH_PDU_TUNNEL6=\n\n#Raw PDU details for sending/receiving udp encapsulated
+    packets\n#RAW_PDU_TUNNEL=txipv4@txport@rxport@optionalNetworkInstanceId, ....\nRAW_PDU_TUNNEL=\n#RAW_PDU_TUNNEL6=txipv6@txport@rxport@optionalNetworkInstanceId,
+    ....\nRAW_PDU_TUNNEL6=\n\n#VXLAN_PDU_TUNNEL=txipv4@txport@rxport@optionalNetworkInstanceId,
+    ....\nVXLAN_PDU_TUNNEL=\n\n#Ip PDU details for sending/receiving udp encapsulated
+    packets\n#IP_PDU_TUNNEL=txipv4@txport@rxport@optionalNetworkInstanceId, ....\nIP_PDU_TUNNEL=\n#IP_PDU_TUNNEL6=txipv6@txport@rxport@optionalNetworkInstanceId,
+    ....\nIP_PDU_TUNNEL6=\n\n#GRE_TUNNEL=txipv4@optionalNetworkInstanceId, ...\nGRE_TUNNEL=\n#GRE_TUNNEL6=txipv6@optionalNetworkInstanceId,
+    ...\nGRE_TUNNEL6=\n\n#PROXY_ARP_ENABLED=0/1\nPROXY_ARP_ENABLED=\n#set this to
+    1 if UPF must send load control info in PFCP messages to CP\nLOAD_CONTROL_INFO=\nOVERLOAD_CONTROL_INFO=\nOVERLOAD_CONTROL_TPS=\n#time
+    in seconds\nOVERLOAD_CONTROL_VALIDITY_TIME=\n#specify the absolute path of JSON
+    rule file\nPREDEFINE_RULE_FILE=\nAPPLICATION_ID_JSON_FILE_PATH=\nUSER_ID_JSON_FILE_PATH=\nUPF_CONFIG_FILE_PATH=\n\nLOG_SERVER_IP
+    = \nLOGSERVERGW=\n#LOGSERVERGW=logesrverGwIp\nLOG_SERVER_PORT = \nPKT_RECORDING
+    = 0\nPKT_RECORDING_DIR =\nSP_DEBUG_FLAG=0\nFP_DEBUG_FLAG=0\nAF_PACKET=\nMAX_RATE_HOST=\n#MAX_RATE_HOST
+    = Its rate is in Kbps\n# RATE_CONTROL_TIME_PERIOD_PARAM is miliseconds\nRATE_CONTROL_TIME_PERIOD_PARAM
+    = 1000\n#MTU=interface_name1@mtu_size1, interface_name2@mtu_size2,..... \nMTU=net1@1500\nDPDK_FRAME_SIZE=\nDPDK_RXQ_SIZE
+    = 1024\nDPDK_TXQ_SIZE = 2048\nDPDK_RAM_8192MULTIPLIER =3\nDPDK_RING_SIZE = 8192
+    \nDPDK_MAX_QUEUES = 1\nDPDK_TX_ATTEMPTS = 0\nDPDK_VHOST =\nDPDK_NORSS =\nDPDK_LINK_DELAY
+    =\nNOMULTISEG =\n#INTF_MAP = ACCESS@enp0s8.4097,CORE@enp0s8.2345,LI_FUNC@enp0s8.1234,CP_FUNC@enp0s8.1234,
+    SGI_LAN@enp0s8.1234\nINTF_MAP =ACCESS@net1.4097,CORE@net1.4097,LI_FUNC@net1.4097,CP_FUNC@net1.4097,SGI_LAN@net1.4097\n#NI
+    = name@1, name@2 and so on. These represent network instance names and id's\nNI=\n#NI_INTF_MAP
+    = 1@enp0s8.4097, 2@enp0s8.2345 etc. This maps the ports to network instance id's\nNI_INTF_MAP=\n#ACCESS_GW
+    = 192.68.0.5, <ip>@networkinstanceid, etc. if the field after @ is not present
+    0 will be taken\n#all GW fields below follow similar rules\nACCESS_GW = 192.168.200.189\n#ACCESS_GW6
+    = 192.68.0.5\nACCESS_GW6 = \n#ACCESS_GW = 192.68.0.5\nCORE_GW = 192.168.200.191\n#CORE_GW6
+    = 192.68.0.5\nCORE_GW6 = \n#likewise as above\nCP_GW = \n#LI_GW6 = 192.68.0.5\nCP_GW6
+    = \nLI_GW = \n#LI_GW6 = 192.68.0.5\nLI_GW6 = \nSGILAN_GW = \nSGILAN_GW6 = \n#set
+    this to 1 if PFCP messages are expected on MGMT IP\nPFCP_ON_MGMT_IP=1\nJUMBO_FRAME_DISABLE
+    =1\n#ODP_PORTS=eth0,eth1,eth2,...\nODP_PORTS=eth0\n# set to 0 for packet sockets,
+    1 for netmap\nODP_BACKEND=0\n# the first core where linux would run, all cores
+    after this run fast path\n# in dpdk case this is the master core obtained from
+    dpdk api based on the coremask passed\nBASECORE=\nWATCHDOG = 0\nCIDR = 24 \nCIDR6
+    = 64 \n#LAG = eth0:eth1,eth2:eth3\nLAG = \nTAP_DELAY=\n# specify eg. xaui to create
+    tap_xaui\nTAPTOKEN=eth\n#buffer count per core for DL Buffering\nBUFFER_COUNT_PER_CORE=\n#specify
+    1 for creating tap_xaui1 for port 0\nTAPOFFSET=0\n\n# simulator specific variables\nNUMINTERFACES=\n#
+    set below to 1 if this is wanted, if it is set to 1 then LG_QFI value will be
+    used\nWANT_LG_QFI=\nLG_QFI=\nIP_VER=6  #6 if ipv6 enabled on LG or keep blank\nNAS
+    = 50000\nR = 1000\nPSB = 650\nFRAGMENTED = 0\nFRAGMENT_MTUSIZE = 300\n# timer
+    below is in microseconds\nLG_BASE_PORT=\nN = 1000\nC = 1\nSTEID = 3\nMTEID = 150000\nSTEPTEID
+    = 3\nMODE=1\nUL_WEIGHT=50\nDL_WEIGHT=50\n#IMIX_PACKET=packet_size@percentage,
+    packet_size2@percentage2,... [Eg. 650@30,1400@70]\nIMIX_PACKET=\n#LG_ENODEB_IP=eNB_ip1,eNB_ip2,.....
+    (Enter eNB IP according to IP_VER parameter filled)\nLG_ENODEB_IP=\nLG_FIXED_UE_IP=\nVLAN_TAG=\n#ESPMODE=TUNN,
+    TRANS(one of these or leave it blank)\nESPMODE=\nESPONUDP=\n#INITVECTOR (initializing
+    vector data)\nINITVECTOR=\n#CRYPTOALGO=AES, AES-CBC, DES, DES-CBC, 3DES, 3DES-CBC,
+    AES-GCM (one of these)\nCRYPTOALGO=\n#CRYPTOKEY=0x11223344 (same format)\nCRYPTOKEY=\n#AUTHALGO=HMAC-MD5-96,
+    HMAC-SHA-1-96, AES-GCM (one of these)\nAUTHALGO=\n#AUTHKEY=0x112233 (same format)\nAUTHKEY=\nAESGCM_SALT=\n#GTP_GWIP/IP6
+    format -- selfip@gwip@subnet@interface_vlan (interface_vlan eg. eth0.4091, also
+    4097 represents novlan)\n#Udp checksum offload\nUDP_CKSUM_OFFLOAD=\nOLDPING=\nNOLOCK=\nTRYLOCK=\n#It
+    is per core and per message type instance like gtp,sgi and gre\nMAX_REASSEMBLIES=\n#timer
+    value is in seconds\nREASSEMBLY_PERIODIC_TIMER=\n#timeout value is in seconds\nREASSEMBLY_TIMEOUT=\nPMTU=\n#DSCP_VLAN_PRIORITY_MAP=dscpvalue:vlanpriority,dscpvalue:vlanpriority...\nDSCP_VLAN_PRIORITY_MAP=\n#MEMPOOL=
+    <size1>:<numBuffers>, <size2>:<numBuffers>, ....\nMEMPOOL=64:300000,304:1000000,1024:400000,1200000:50,2400000:1\nPCAP=\nNE_NAME=\nTRACE_DIR=\n#SMF
+    = IP1@NetworkInstanceId,IP2,IP3...\n#if NetworkInstanceId is not present (the
+    @ clause is optional, the netid is taken as zero)\nSMF=\n#SMF6 = IP1,IP2,IP3...\nSMF6=\nQOSMOS_LICENSE=\nNAVL_PLUGINS_DIR=\nQOSMOS_FLOWS=\nIPOQUE_LICENSE=\nSGWU_CSID=\nPGWU_CSID=\n#
+    below in miliseconds\nPFCP_RESPONSE_TIMER=\n\n#rate script calling\nRATE_SCRIPT=\n\n#P4
+    offload\nP4_OFFLOAD=\n#this maps the port of CPU to then physical NIC port CPUPORT:NICPORT,
+    CPUPORT:NICPORT,...\nP4_PORTMAP=\n\n#if the below is set in miliseconds, then
+    GTP echo requests are sent out\nGTP_ECHO_REQUEST_TIMER=\n\n#below setting is used
+    to declare a GTP Path failure if so many echo requests are not responded to\nGTP_ECHO_REQUEST_MAX_RETRIES=\n\n#if
+    the below is set in miliseconds, UPF sends out hearbeat requests at this periodicity
+    to SMF/CP\nHEARTBEAT_TIMER=\n\n# after these many retires, Association with CP
+    is considered toast\nHEARTBEAT_RETRIES=\n\nQUERY_NIC_RSS=\n\n#if the below is
+    set in miliseconds, UPF uses this to release Association during EPFAR feature
+    exercise\nASSOC_REL_EPFAR_TIMER=\n\n#if the below present is set (period is in
+    unit of miliseconds), UPF uses this to release Association in graceful way\nGRACEFUL_RELEASE_PERIOD_PRESENT=\nGRACEFUL_RELEASE_PERIOD=\n\n#
+    timers in miliseconds for removing idle flows in case of appid detection and flow
+    tracking\nFLOW_IDLE_PERIODIC_TIMEOUT=\nFLOW_IDLE_EXPIRY_TIMEOUT=\n\n#this should
+    be in the format of uuid (lookup wikipedia)\n#eg. 123e4567-e89b-12d3-a456-426614174000\n\nNF_INSTANCE_ID=\nNO_IP_PLUMBING=\n\n#user_plane_node_id
+    should be in the format of hex value like 0x1122334455667788\n5GS_USER_PLANE_NODE_ID=\n#The
+    entries below map the dstt port on a one to one basis with nwtt port, the key
+    is dstt port and must be unique for each entry\n#format is dsttport@nwttport,dsttport@nwttport,....\nTSN_PORT_MAP=\n\nPMF_IP=\nPMF_IP6=\nPMF_PORT_3GPP=\nPMF_PORT_NON_3GPP=\n#
+    mac should be like a:b:c:d:e:f\nPMF_MAC_3GPP=\nPMF_MAC_NON_3GPP=\n#PMF_TIMER=<value
+    in milliseconds>\nPMF_TIMER=\n\n#PER_QFI_PMF_IP=<qfi>@<pmf_ipv4_address>,........\n#PER_QFI_PMF_IP6=<qfi>@<pmf_ipv6_address>,..........\n#PER_QFI_PMF_PORTS=<qfi>@<pmf_port_3gpp>@<pmf_port_non_3gpp>,......\n#PER_QFI_PMF_INFO_MAC=<qfi>@><pmf_mac_3gpp>@<pmf_mac_non_3gpp>,.......\n\nPER_QFI_PMF_IP=\nPER_QFI_PMF_IP6=\nPER_QFI_PMF_PORTS=\nPER_QFI_PMF_INFO_MAC=\n\nRAN_TIME_SYNC=\nDPI=\nSUDO=\n\n#ipv4@net_id
+    e.g 10.3.10.136@0\nL2TP_PEER_IP=\n\n#ipv6@net_id e.g 2001:1::7@0\nL2TP_PEER_IP6=\n\n#
+    2 for PPP_CHAP, 3 for PPP_PAP\nL2TP_PPP_AUTH_METHOD=\nL2TP_PPP_USERNAME=\nL2TP_PPP_PASSWORD=\nL2TP_PPP_LCP_TIMEOUT=\nL2TP_PPP_TIMEOUT=\nL2TP_PPP_MAX_RETRY=\n\nMPTCP_PROXY_TYPE=\nMPTCP_PROXY_PORT=\nMPTCP_PROXY_IP4=\nMPTCP_PROXY_IP6=\nMPTCP_N6_ROUTABLE_IP4=\nMPTCP_N6_ROUTABLE_IP6=\n#MPTCP_UE_IP4_POOL_3GPP=beginip@endip\nMPTCP_UE_IP4_POOL_3GPP=\n#MPTCP_UE_IP4_POOL_NON_3GPP=beginip@endip\nMPTCP_UE_IP4_POOL_NON_3GPP=\n#MPTCP_UE_IP6_POOL_3GPP=beginip@endip\nMPTCP_UE_IP6_POOL_3GPP=\n#MPTCP_UE_IP6_POOL_NON_3GPP=beginip@endip\nMPTCP_UE_IP6_POOL_NON_3GPP=\n\n#set
+    the value in Kbps (Kilo Bits per second, 1Mbps = 1000), unset or 0 means infinite
+    rate\nMAX_UL_RATE=\nMAX_DL_RATE=\n\n#ipv4\nWEBSERVER_IP={{ .Values.podIP}}\n#ipv6
+    \nWEBSERVER_IP6=\n#HTTP PORT\nWEBSERVER_PORT=9080\n#HTTPS PORT\nWEBSERVER_PORT_HTTPS=\n\nIPSEC=\n#TCP
+    Stack related parameters\n#all timer parameters in microseconds\nFP_TCP_USER_TIMEOUT=\nFP_TCP_INITIAL_RETRANSMISSION_TIMEOUT=\nFP_TCP_MSL_TIMEOUT=\nFP_TCP_TIME_WAIT_TIMEOUT=\nFP_TCP_INITIAL_PER_CONNECTION_RX_FIFO_SIZE_KB=\nFP_TCP_INITIAL_PER_CONNECTION_TX_FIFO_SIZE_KB=\nFP_TCP_MAX_FIFO_CHUNK_SIZE_BYTES=\nFP_TCP_MAX_CONNECTIONS=\nFP_TCP_SACK_PERMITTED=\nFP_TCP_WINDOW_SCALE=\nFP_TCP_MSS=\nFP_TCP_SYN_RCVD_TIMER=\nFP_TCP_SYN_SENT_TIMER=\nFP_TCP_CHECKSUM_VERIFICATION=\nFP_TCP_ALPHA=\nFP_TCP_BETA=\nFP_TCP_LBOUND_RTT=\nFP_TCP_UBOUND_RTT=\nFP_TCP_PAWS=\nFP_TCP_CONG_ALGO=\nFP_TCP_RACK=\nFP_TCP_RACK_TLP_MAX_ACK_DELAY=\nFP_TCP_RACK_MIN_RTT_WIN_SIZE=\n#
+    0 or blank meands disabled, 1 means enable, 2 means enable explicitly on user
+    request for connections\nFP_TCP_MPTCP_ENABLE=\nFP_TCP_MPTCP_CHECKSUM=\nFP_TCP_MPTCP_PATH_MANAGER=\nFP_TCP_MPTCP_NUM_SUBFLOWS=\nFP_TCP_MPTCP_SCHEDULER=\nFP_TCP_MPTCP_CWND_LIMITED=\n\n#format
+    for below is ip, ip, ip\n#eg. 10.10.10.10, 11.11.11.11\nFP_TCP_MPTCP_SELF_IP=\nFP_TCP_MPTCP_SELF_IP6=\nFP_TCP_MPTCP_RETRANSMISSION_TIMEOUT=\nNRF_IP=\nNRF_IP_PORT=\nNRF_HEARTBEAT_TIMER=\nNUM_MULTIQTAP_QUEUES=\nNUM_MULTIQGTP_QUEUES=\n\n#prometheus\nPROMETHEUS_IP=\nPROMETHEUS_PORT=\n\n#
+    1 means no authentication. \nNO_WEB_AUTH=1\n# memif config\nMEMIF_SLOTS=\nMEMIF_PAYLOAD=\n\nUSE_SP_SLAVE_THREADS=\nNUM_SP_SLAVE_THREADS=\nVLAN_STRIP=\n\nHA_IP=\nHA_IP_PEER=\nHA_PORT=\n\n#
+    when set to 1, it preserves association even when SMF is detected to be down\nPRESERVE_ASSOCIATION=\nUPF_MBS_MULTICAST_GTP_IP=\nUPF_MBS_MULTICAST_GTP_IP6=\nUPF_MBS_LOCAL_INGRESS_TUNNEL_UDP_PORT_START=\nUPF_MBS_LOCAL_INGRESS_TUNNEL_UDP_PORT_END=\nHTTP2_IP=\nBYPASS_SWITCH_RULE=\n\n#in
+    miliseconds\nDL_BUFFERING_PERIODIC_TIMER=\n\nLTUPF=\n\nEND_DP_CFG\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: my-config-updated
